@@ -15,6 +15,15 @@ S = "${WORKDIR}/git"
 
 PR = "r5"
 
+INHIBIT_DEFAULT_DEPS = "1"
+deltask do_populate_sysroot
+do_package[noexec] = "1"
+deltask do_package_qa
+do_packagedata[noexec] = "1"
+deltask do_package_write_ipk
+deltask do_package_write_deb
+deltask do_package_write_rpm
+
 PITFT="${@bb.utils.contains("MACHINE_FEATURES", "pitft", "1", "0", d)}"
 PITFT22="${@bb.utils.contains("MACHINE_FEATURES", "pitft22", "1", "0", d)}"
 PITFT28r="${@bb.utils.contains("MACHINE_FEATURES", "pitft28r", "1", "0", d)}"
@@ -144,7 +153,7 @@ do_deploy_append_raspberrypi3-64() {
     echo "device_tree=bcm2710-rpi-3-b.dtb" >>${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 }
 
-addtask deploy before do_package after do_install
+addtask deploy before do_build after do_install
 do_deploy[dirs] += "${DEPLOYDIR}/bcm2835-bootfiles"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

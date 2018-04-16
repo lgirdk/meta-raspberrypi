@@ -5,6 +5,15 @@ COMPATIBLE_MACHINE = "^rpi$"
 
 DEPENDS = "u-boot-mkimage-native"
 
+INHIBIT_DEFAULT_DEPS = "1"
+deltask do_populate_sysroot
+do_package[noexec] = "1"
+deltask do_package_qa
+do_packagedata[noexec] = "1"
+deltask do_package_write_ipk
+deltask do_package_write_deb
+deltask do_package_write_rpm
+
 SRC_URI = "file://boot.cmd.in"
 
 do_compile() {

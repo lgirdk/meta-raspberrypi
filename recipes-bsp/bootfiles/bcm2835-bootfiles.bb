@@ -7,6 +7,15 @@ inherit deploy
 
 include recipes-bsp/common/firmware.inc
 
+INHIBIT_DEFAULT_DEPS = "1"
+deltask do_populate_sysroot
+do_package[noexec] = "1"
+deltask do_package_qa
+do_packagedata[noexec] = "1"
+deltask do_package_write_ipk
+deltask do_package_write_deb
+deltask do_package_write_rpm
+
 RDEPENDS_${PN} = "rpi-config"
 
 COMPATIBLE_MACHINE = "^rpi$"
@@ -32,7 +41,7 @@ do_deploy() {
     touch ${DEPLOYDIR}/${PN}/${PN}-${PV}.stamp
 }
 
-addtask deploy before do_package after do_install
+addtask deploy before do_build after do_install
 do_deploy[dirs] += "${DEPLOYDIR}/${PN}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
