@@ -16,7 +16,7 @@ deltask do_package_write_ipk
 deltask do_package_write_deb
 deltask do_package_write_rpm
 
-RDEPENDS_${PN} = "rpi-config"
+DEPENDS = "rpi-config"
 
 COMPATIBLE_MACHINE = "^rpi$"
 
