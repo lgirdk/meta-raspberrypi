@@ -7,6 +7,7 @@ SRCREV = "76b2727efaca513fe81b4ba56658ea2b9f9d0907"
 SRC_URI = " \
     git://github.com/raspberrypi/linux.git;protocol=git;branch=${LINUX_RPI_BRANCH} \
     "
+SRC_URI_append_raspberrypi4 = " file://rpi4-kernel-misc.cfg"
 SRC_URI_append_raspberrypi4-64 = " file://rpi4-64-kernel-misc.cfg"
 
 require linux-raspberrypi.inc
